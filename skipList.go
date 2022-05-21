@@ -1,7 +1,7 @@
 package ConcurrentSkipList
 
 import (
-	"github.com/slclub/ConcurrentSkipList/spinlock"
+	"github.com/slclub/skiplist/spinlock"
 	//spinlock "github.com/panjf2000/ants/v2/internal"
 	"math/rand"
 	"sync"
