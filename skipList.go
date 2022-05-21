@@ -1,6 +1,8 @@
 package ConcurrentSkipList
 
 import (
+	"github.com/slclub/ConcurrentSkipList/spinlock"
+	//spinlock "github.com/panjf2000/ants/v2/internal"
 	"math/rand"
 	"sync"
 	"sync/atomic"
@@ -12,6 +14,7 @@ type skipList struct {
 	head   *Node
 	tail   *Node
 	mutex  sync.RWMutex
+	splock sync.Locker
 }
 
 // newSkipList will create a concurrent skip list with given level.
@@ -27,6 +30,7 @@ func newSkipList(level int) *skipList {
 		length: 0,
 		head:   head,
 		tail:   tail,
+		splock: spinlock.NewSpinLock(),
 	}
 }
 
@@ -103,8 +107,8 @@ func (s *skipList) searchWithoutPreviousNodes(index uint64) *Node {
 // If skip has these this index, overwrite the value, otherwise add it.
 func (s *skipList) insert(index uint64, value interface{}) {
 	// Write lock and unlock.
-	s.mutex.Lock()
-	defer s.mutex.Unlock()
+	s.splock.Lock()
+	defer s.splock.Unlock()
 
 	previousNodes, currentNode := s.searchWithPreviousNodes(index)
 
@@ -139,8 +143,8 @@ func (s *skipList) insert(index uint64, value interface{}) {
 // If existed, delete it and update length, otherwise do nothing.
 func (s *skipList) delete(index uint64) {
 	// Write lock and unlock.
-	s.mutex.Lock()
-	defer s.mutex.Unlock()
+	s.splock.Lock()
+	defer s.splock.Unlock()
 
 	previousNodes, currentNode := s.searchWithPreviousNodes(index)
 
