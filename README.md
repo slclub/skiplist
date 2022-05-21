@@ -11,10 +11,10 @@ A light, high-performance, concurrent, thread-safe skip list implementation writ
 - **Import package**
 
 ```bash
-go get github.com/AceDarkknight/ConcurrentSkipList
+go get github.com/AceDarkknight/skiplist
 ```
 ```go
-import "github.com/AceDarkknight/ConcurrentSkipList"
+import "github.com/AceDarkknight/skiplist"
 ```
 
 - **Usage**
