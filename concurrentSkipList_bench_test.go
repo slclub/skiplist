@@ -1,4 +1,4 @@
-package ConcurrentSkipList
+package skiplist
 
 import (
 	"math/rand"

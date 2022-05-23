@@ -1,4 +1,4 @@
-package ConcurrentSkipList
+package skiplist
 
 type Node struct {
 	index     uint64

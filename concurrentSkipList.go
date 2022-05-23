@@ -1,7 +1,7 @@
 /*
 Package ConcurrentSkipList provide an implementation of skip list. It's thread-safe in concurrency and high performance.
 */
-package ConcurrentSkipList
+package skiplist
 
 import (
 	"errors"
