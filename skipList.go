@@ -49,7 +49,7 @@ func (s *skipList) searchWithPreviousNodes(index uint64) ([]*Node, *Node) {
 		// Iterate value util value's index is >= given index.
 		// The max iterate count is skip list's length. So the worst O(n) is N.
 		for currentNode.nextNodes[l] != s.tail && currentNode.nextNodes[l].index < index {
-			currentNode = currentNode.nextNodes[l]
+			currentNode = currentNode.Next(l)
 		}
 
 		// When next value's index is >= given index, add current value whose index < given index.

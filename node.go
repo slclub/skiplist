@@ -24,3 +24,13 @@ func (n *Node) Index() uint64 {
 func (n *Node) Value() interface{} {
 	return n.value
 }
+
+func (n *Node)Next(level ...int) *Node {
+	switch len(level) {
+	case  1:
+		return n.nextNodes[level[0]]
+	case  0:
+		return n.nextNodes[0]
+	}
+	return nil
+}
