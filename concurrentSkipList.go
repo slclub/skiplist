@@ -90,6 +90,16 @@ func (s *ConcurrentSkipList) Search(index uint64) (*Node, bool) {
 	return result, result != nil
 }
 
+func (s *ConcurrentSkipList)SearchCloset(index uint64) ([]*Node, *Node) {
+	sl := s.skipLists[getShardIndex(index)]
+	if atomic.LoadInt32(&sl.length) == 0 {
+		return nil, nil
+	}
+
+	result, node := sl.searchWithPreviousNodes(index)
+	return result, node
+}
+
 // Insert will insert a value into skip list. If skip has these this index, overwrite the value, otherwise add it.
 func (s *ConcurrentSkipList) Insert(index uint64, value interface{}) {
 	// Ignore nil value.

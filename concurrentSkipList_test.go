@@ -75,6 +75,9 @@ func TestConcurrentSkipList_Search(t *testing.T) {
 			if got, existed := concurrentSkipList1.Search(tt.args.input); existed != tt.want.existed || got.value != tt.want.value {
 				t.Errorf("Search() = value:%v existed:%v, want value:%v existed:%v", got.Value(), existed, tt.want.value, tt.want.existed)
 			}
+			if got, node := concurrentSkipList1.SearchCloset(tt.args.input); node == nil {
+				t.Errorf("SearchCloset() = value:%v existed:%v, want value:%v existed:%v", node.Value(), len(got), nil, nil)
+			}
 		})
 	}
 
