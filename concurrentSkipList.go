@@ -185,6 +185,16 @@ func (s *ConcurrentSkipList) Sub(startNumber int32, length int32) []*Node {
 	return result
 }
 
+// Is need lock? if safe:true using lock
+var safe bool = true
+func Safe() {
+	safe = true
+}
+
+func Unsafe() {
+	safe = false
+}
+
 // Locate which shard the given index belong to.
 func getShardIndex(index uint64) int {
 	result := -1
